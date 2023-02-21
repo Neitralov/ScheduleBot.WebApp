@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - ScheduleBot</title>
+    <link rel="icon" href="~/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/ScheduleBot.WebApp.styles.css" asp-append-version="true"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="menu">
+    <div id="header">
+        <h1>Бот расписания</h1>
+    </div>
+    <div id="nav">
+        <div id="top-nav">
+            <a asp-controller="Bot" asp-action="StartBot">
+                <div class="page-link"
+                     @if (Context.Request.Path.ToString().Contains("/bot") || Context.Request.Path == "/")
+                     {
+                         @:id="currentPage" 
+                     }>
+                    <div class="page-link-container">
+                        <img width="28px" height="28px" src="~/icons/play.svg" alt="Тут иконка"/>
+                        <p>Управление ботом</p>
+                    </div>
+                </div>
+            </a>
+            <a asp-controller="Statistics" asp-action="Statistics">
+                <div class="page-link"
+                     @if (Context.Request.Path.ToString().Contains("/statistics"))
+                     {
+                         @:id="currentPage" 
+                     }>
+                    <div class="page-link-container">
+                        <img width="28px" height="28px" src="~/icons/stat.svg" alt="Тут иконка"/>
+                        <p>Статистика</p>
+                    </div>
+                </div>
+            </a>
+            <a asp-controller="Logs" asp-action="Logs">
+                <div class="page-link"
+                     @if (Context.Request.Path.ToString().Contains("/logs"))
+                     {
+                         @:id="currentPage" 
+                     }>
+                    <div class="page-link-container">
+                        <img width="28px" height="28px" src="~/icons/log.svg" alt="Тут иконка"/>
+                        <p>Просмотр логов</p>
+                    </div>
+                </div>
+            </a>
+            <a asp-controller="Database" asp-action="Database">
+                <div class="page-link"
+                     @if (Context.Request.Path.ToString().Contains("/database"))
+                     {
+                         @:id="currentPage" 
+                     }>
+                    <div class="page-link-container">
+                        <img width="28px" height="28px" src="~/icons/database.svg" alt="Тут иконка"/>
+                        <p>База данных</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div id="bottom-nav">
+            <div class="page-link">
+                <a class asp-controller="Authorization" asp-action="Logout">
+                    <div class="page-link-container">
+                        <img width="28px" height="28px" src="~/icons/logout.svg" alt="Тут иконка"/>
+                        <p>Выход</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content">
+    @RenderBody()
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

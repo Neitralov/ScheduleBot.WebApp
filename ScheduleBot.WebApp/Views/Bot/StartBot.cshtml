@@ -1,0 +1,88 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model StartBotViewModel
+@{
+    ViewData["Title"] = "Управление ботом";
+}
+
+<div class="shell">
+    @if (ViewBag.IsRunning == false)
+    {
+        <form method="post" action="/run">
+            <div class="panel">
+                <div class="subcontainer">
+                    <h2>Статус бота: <span style="color: #e54949">ОСТАНОВЛЕН</span></h2>
+                    <input class="submit-to-run" type="submit" value="Запустить"/>
+                </div>
+            </div>
+            <div class="delimiter"></div>
+            <div class="panel">
+                <h2 class="header">Настройки конфигурации</h2>
+                <div class="input-block">
+                    <label class="input-block__label">Токен бота</label>
+                    <span class="error" asp-validation-for="BotTokenApi"></span>
+                    <input class="input-text-field" type="text" name="BotTokenApi" value="@Model.BotTokenApi"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Telegram ID администратора</label>
+                    <span class="error" asp-validation-for="AdminId"></span>
+                    <input class="input-text-field" type="text" name="AdminId" value="@Model.AdminId"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Токен CloudConvert</label>
+                    <span class="error" asp-validation-for="CloudConvertTokenApi"></span>
+                    <input class="input-text-field" type="text" name="CloudConvertTokenApi" value="@Model.CloudConvertTokenApi"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Время между проверками расписания (в секундах)</label>
+                    <span class="error" asp-validation-for="TimeBetweenChecks"></span>
+                    <input class="input-text-field" type="text" name="TimeBetweenChecks" value="@Model.TimeBetweenChecks"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Начало диапазона проверки расписания (в часах)</label>
+                    <span class="error" asp-validation-for="CheckTimeStart"></span>
+                    <input class="input-text-field" type="text" name="CheckTimeStart" value="@Model.CheckTimeStart"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Конец диапазона проверки расписания (в часах)</label>
+                    <span class="error" asp-validation-for="CheckTimeEnd"></span>
+                    <input class="input-text-field" type="text" name="CheckTimeEnd" value="@Model.CheckTimeEnd"/>
+                </div>
+            </div>
+            <div class="delimiter"></div>
+            <div class="panel">
+                <h2 class="header">Ссылки на файлы с расписанием</h2>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание первого корпуса</label>
+                    <span class="error" asp-validation-for="FirstCorpsSchedulePath"></span>
+                    <input class="input-text-field" type="text" name="FirstCorpsSchedulePath" value="@Model.FirstCorpsSchedulePath"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание второго корпуса</label>
+                    <span class="error" asp-validation-for="SecondCorpsSchedulePath"></span>
+                    <input class="input-text-field" type="text" name="SecondCorpsSchedulePath" value="@Model.SecondCorpsSchedulePath"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание третьего корпуса</label>
+                    <span class="error" asp-validation-for="ThirdCorpsSchedulePath"></span>
+                    <input class="input-text-field" type="text" name="ThirdCorpsSchedulePath" value="@Model.ThirdCorpsSchedulePath"/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание четвертого корпуса</label>
+                    <span class="error" asp-validation-for="FourthCorpsSchedulePath"></span>
+                    <input class="input-text-field" type="text" name="FourthCorpsSchedulePath" value="@Model.FourthCorpsSchedulePath"/>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <form method="get" asp-action="ShutdownBot">
+            <div class="panel">
+                <div class="subcontainer">
+                    <h2>Статус бота: <span style="color: #4AE359">РАБОТАЕТ</span></h2>
+                    <input class="submit-to-terminate" type="submit" value="Выключить"/>
+                </div>
+            </div>
+        </form>
+    }
+</div>

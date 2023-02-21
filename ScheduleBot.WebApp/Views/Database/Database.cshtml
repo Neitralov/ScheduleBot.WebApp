@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "База данных";
+}
+
+<div class="shell">
+    <form method="post" asp-action="DatabaseImport" enctype="multipart/form-data">
+        <div class="panel">
+            <div class="subcontainer">
+                <h2>Импортировать копию базы данных</h2>
+                <div style="display: flex; align-items: center">
+                    <input id="file" type="file" name="file" accept="application/zip">
+                    <label class="label" for="file" style="display: flex; align-items: center">
+                        <img width="24px" height="24px" src="~/icons/upload.svg" alt="Тут иконка" style="margin-right: 5px"/>
+                        Выберите файл
+                    </label>
+                    <input class="submit-to-run" type="submit" value="Загрузить"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="delimiter"></div>
+    <form method="get" asp-action="DatabaseExport">
+        <div class="panel">
+            <div class="subcontainer">
+                <h2>Экспортировать копию базы данных</h2>
+                <input class="submit-to-run" type="submit" value="Скачать"/>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,59 @@
+@model StatisticsViewModel
+@{
+    ViewData["Title"] = "Статистика";
+}
+
+<div class="shell">
+    <div class="panel">
+        <div class="subcontainer">
+            <h2>Всего подписчиков: @Model.TotalSubscribers</h2>
+        </div>
+    </div>
+    <div class="delimiter"></div>
+    <div style="display: grid; grid-template-rows: auto auto; grid-template-columns: auto auto; grid-row-gap: 25px; grid-column-gap: 25px;">
+        <div class="panel">
+            <h2 class="h2_header">Первый корпус: @Model.SubscribersInCorps[0]</h2>
+            <div class="statistics-row" style="margin-bottom: 5px">
+                <img width="24px" height="24px" src="~/icons/chat.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Чатов: @Model.ChatSubscribersInCorps[0]</h3>
+            </div>
+            <div class="statistics-row">
+                <img width="24px" height="24px" src="~/icons/group.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Групп: @Model.GroupSubscribersInCorps[0]</h3>
+            </div>
+        </div>
+        <div class="panel">
+            <h2 class="h2_header">Второй корпус: @Model.SubscribersInCorps[1]</h2>
+            <div class="statistics-row" style="margin-bottom: 5px">
+                <img width="24px" height="24px" src="~/icons/chat.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Чатов: @Model.ChatSubscribersInCorps[1]</h3>
+            </div>
+            <div class="statistics-row">
+                <img width="24px" height="24px" src="~/icons/group.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Групп: @Model.GroupSubscribersInCorps[1]</h3>
+            </div>
+        </div>
+        <div class="panel">
+            <h2 class="h2_header">Третий корпус: @Model.SubscribersInCorps[2]</h2>
+            <div class="statistics-row" style="margin-bottom: 5px">
+                <img width="24px" height="24px" src="~/icons/chat.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Чатов: @Model.ChatSubscribersInCorps[2]</h3>
+            </div>
+            <div class="statistics-row">
+                <img width="24px" height="24px" src="~/icons/group.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Групп: @Model.GroupSubscribersInCorps[2]</h3>
+            </div>
+        </div>
+        <div class="panel">
+            <h2 class="h2_header">Четвертый корпус: @Model.SubscribersInCorps[3]</h2>
+            <div class="statistics-row" style="margin-bottom: 5px">
+                <img width="24px" height="24px" src="~/icons/chat.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Чатов: @Model.ChatSubscribersInCorps[3]</h3>
+            </div>
+            <div class="statistics-row">
+                <img width="24px" height="24px" src="~/icons/group.svg" alt="Тут иконка"/>
+                <h3 class="statistics-row__h3">Групп: @Model.GroupSubscribersInCorps[3]</h3>
+            </div>
+        </div>
+    </div>
+</div>

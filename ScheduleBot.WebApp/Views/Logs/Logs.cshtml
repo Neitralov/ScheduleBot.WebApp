@@ -1,0 +1,29 @@
+@model List<LogsViewModel>
+@{
+    ViewData["Title"] = "Просмотр логов";
+}
+
+<div class="shell">
+    <div class="panel">
+        @foreach (var log in @Model)
+        {
+            <h4>
+                @log.DateTime
+                @if (log.Status.Contains("ERROR"))
+                {
+                    <span style="color: #FF0000">@log.Status</span>
+                }
+                else
+                {
+                    @log.Status
+                }
+            </h4>
+            <h3 class="panel-3__h3">@log.Message</h3>
+
+            if (Model[^1] != log)
+            {
+                <hr class="horizontal-line"/>
+            }
+        }
+    </div>
+</div>

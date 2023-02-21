@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: unset;
+    padding: unset;
+}
+
+a {
+    text-decoration: none;
+}
+
+html {
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    height: 100%;
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    background: #FAFAFA;
+}
+
+.panel {
+    background: white;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 25%);
+    padding: 50px;
+    border-radius: 25px;
+}
+
+.shell {
+    box-sizing: border-box;
+    padding: 50px;
+    width: 100%;
+}
+
+.delimiter {
+    margin-bottom: 25px;
+}
+
+.authorization-panel {
+    width: 500px;
+    background: #628EFF;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.submit-to-run {
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+    height: 40px;
+    background: #4AE359;
+    border: unset;
+    color: white;
+}
+
+.submit-to-run:hover {
+    background: #46d754;
+}
+
+.submit-to-terminate {
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+    height: 40px;
+    background: #e54949;
+    border: unset;
+    color: white;
+}
+
+.submit-to-terminate:hover {
+    background: #da4545;
+}
+
+.h1 {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.password-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.password {
+    border: unset;
+    border-radius: 25px;
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 24px;
+    text-indent: 25px;
+}
+
+.password:focus-visible {
+    outline: unset;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: end;
+}
+
+.subcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.h2_header {
+    margin-bottom: 15px;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 75%)
+}
+
+.header {
+    margin-bottom: 15px;
+}
+
+.input-block {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.input-block:last-child {
+    margin: 10px 0 0 0 !important;
+}
+
+.input-block__label {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.input-text-field {
+    background: white;
+    border: black 1px solid;
+    border-radius: 25px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    text-indent: 25px;
+}
+
+.input-text-field:focus-visible {
+    outline: unset;
+}
+
+.statistics-row__h3 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+.statistics-row {
+    display: flex;
+    align-items: center;
+}
+
+#file-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    background: white;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 25%);
+    border-radius: 25px;
+    width: 60px;
+    height: 40px;
+    border: unset;
+}
+
+.panel-3__h3 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.horizontal-line {
+    margin: 10px 0;
+    color: rgba(0, 0, 0, 50%)
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.label {
+    display: block;
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 25px;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 25%);
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 25px;
+}
+
+.field-validation-error {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold; 
+    color: red; 
+    font-size: 16px;
+}
