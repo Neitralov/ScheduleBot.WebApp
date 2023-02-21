@@ -1,5 +1,6 @@
 .idea
 ScheduleBot.WebApp/bin/
 ScheduleBot.WebApp/obj/
+ScheduleBot.WebApp/tmp/
 ScheduleBot.WebApp.sln.DotSettings.user
 .env
