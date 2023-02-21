@@ -2,5 +2,6 @@
 ScheduleBot.WebApp/bin/
 ScheduleBot.WebApp/obj/
 ScheduleBot.WebApp/tmp/
+ScheduleBot.WebApp/build-and-publish.sh
 ScheduleBot.WebApp.sln.DotSettings.user
 .env
