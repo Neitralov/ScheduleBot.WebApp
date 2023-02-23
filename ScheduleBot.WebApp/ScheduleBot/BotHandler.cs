@@ -112,8 +112,11 @@ public class BotHandler
 
         Action? action = requestException?.ErrorCode switch
         {
+            //Выключение бота, если токен указан неверно
             401 => () => Bot.GetInstance()?.Kill(),
+            //Выключение бота, если включена вторая конфликтующая копия
             409 => () => Bot.GetInstance()?.Kill(),
+            //Иные ошибки TelegramAPI не должны выключать бота
             _ => null
         };
         action?.Invoke();
