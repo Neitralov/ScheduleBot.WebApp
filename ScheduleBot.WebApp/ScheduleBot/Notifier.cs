@@ -29,7 +29,7 @@ public class Notifier
         LogInfo($"Подписчики корпуса №{(int)corps} были оповещены.");
     }
 
-    public async Task SubscribeToScheduleNewsletter(long chatId, Corps corps)
+    public async Task SubscribeToScheduleNewsletterAsync(long chatId, Corps corps)
     {
         await using var db = new DataBaseProvider();
         var isThereSameSubscriber =
@@ -62,7 +62,7 @@ public class Notifier
         await db.SaveChangesAsync();
     }
 
-    public async Task UnsubscribeToScheduleNewsletter(long chatId)
+    public async Task UnsubscribeToScheduleNewsletterAsync(long chatId)
     {
         await using var db = new DataBaseProvider();
         var isThereThisSubscriber = db.Subscribers.Any(x => x.TelegramId == chatId);

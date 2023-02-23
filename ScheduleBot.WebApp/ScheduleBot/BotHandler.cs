@@ -69,24 +69,33 @@ public class BotHandler
         const string unknownCommandMessage =
             "Такой команды не существует. Выполните /start, чтобы получить список доступных команд.";
 
-        var task = command switch
+        Func<Task> task = command switch
         {
-            "/start"       => _botClient.SendTextMessageAsync(chatId, startMessage),
-            "/get1"        => _notifier.SendSchedulePictureAsync(chatId, Corps.First),
-            "/get2"        => _notifier.SendSchedulePictureAsync(chatId, Corps.Second),
-            "/get3"        => _notifier.SendSchedulePictureAsync(chatId, Corps.Third),
-            "/get4"        => _notifier.SendSchedulePictureAsync(chatId, Corps.Fourth),
-            "/subscribe1"  => _notifier.SubscribeToScheduleNewsletter(chatId, Corps.First),
-            "/subscribe2"  => _notifier.SubscribeToScheduleNewsletter(chatId, Corps.Second),
-            "/subscribe3"  => _notifier.SubscribeToScheduleNewsletter(chatId, Corps.Third),
-            "/subscribe4"  => _notifier.SubscribeToScheduleNewsletter(chatId, Corps.Fourth),
-            "/unsubscribe" => _notifier.UnsubscribeToScheduleNewsletter(chatId),
-            "/statistics"  => _adminTools.GetNumberOfBotSubscribersAsync(chatId),
-            "/logs"        => _adminTools.GetLogsArchiveAsync(chatId),
-            _              => _botClient.SendTextMessageAsync(chatId, unknownCommandMessage)
+            "/start"       => async () => await _botClient.SendTextMessageAsync(chatId, startMessage),
+            "/get1"        => async () => await _notifier.SendSchedulePictureAsync(chatId, Corps.First),
+            "/get2"        => async () => await _notifier.SendSchedulePictureAsync(chatId, Corps.Second),
+            "/get3"        => async () => await _notifier.SendSchedulePictureAsync(chatId, Corps.Third),
+            "/get4"        => async () => await _notifier.SendSchedulePictureAsync(chatId, Corps.Fourth),
+            "/subscribe1"  => async () => await _notifier.SubscribeToScheduleNewsletterAsync(chatId, Corps.First),
+            "/subscribe2"  => async () => await _notifier.SubscribeToScheduleNewsletterAsync(chatId, Corps.Second),
+            "/subscribe3"  => async () => await _notifier.SubscribeToScheduleNewsletterAsync(chatId, Corps.Third),
+            "/subscribe4"  => async () => await _notifier.SubscribeToScheduleNewsletterAsync(chatId, Corps.Fourth),
+            "/unsubscribe" => async () => await _notifier.UnsubscribeToScheduleNewsletterAsync(chatId),
+            "/statistics"  => async () => await _adminTools.GetNumberOfBotSubscribersAsync(chatId),
+            "/logs"        => async () => await _adminTools.GetLogsArchiveAsync(chatId),
+            _              => async () => await _botClient.SendTextMessageAsync(chatId, unknownCommandMessage)
         };
 
-        await task;    
+        try
+        {
+            await task.Invoke();
+        }
+        catch
+        {
+            LogInfo(chatId == _adminId
+                ? $"Пользователь ADMIN заблокировал бота. Ответ отменен."
+                : $"Пользователь {chatId} заблокировал бота. Ответ отменен.");
+        }
     }
 
     private static Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception,
