@@ -12,34 +12,29 @@ public class LogsController : Controller
     [Route("/logs")]
     public IActionResult Logs()
     {
-        var logsDirectory = new DirectoryInfo(Environment.CurrentDirectory + "/Logs");
-        
-        var logFiles = logsDirectory.GetFiles();
-       
-        var sortedLogFiles = logFiles.OrderBy(file => file.CreationTime).ToList();
-        
         var viewModels = new List<LogsViewModel>();
-
-        foreach (var logFile in sortedLogFiles)
+        
+        if (Exists(Environment.CurrentDirectory + "/Logs/log.txt") is false)
+            return View(viewModels);
+        
+        var logFile = new FileInfo(Environment.CurrentDirectory + "/Logs/log.txt");
+        var logs = ReadAllLines(logFile.FullName).Reverse();
+       
+        foreach (var log in logs)
         {
-            var text = ReadAllLines(logFile.FullName).Reverse();  
+            var logParts = log.Split('|');
             
-            foreach (var line in text)
+            if (logParts.Length != 3)
+                continue;
+            
+            var viewModel = new LogsViewModel()
             {
-                var log = line.Split('|');
+                DateTime = logParts[0],
+                Status = logParts[1],
+                Message = logParts[2]
+            };
             
-                if (log.Length != 3)
-                    continue;
-            
-                var viewModel = new LogsViewModel()
-                {
-                    DateTime = log[0],
-                    Status = log[1],
-                    Message = log[2]
-                };
-            
-                viewModels.Add(viewModel);
-            }
+            viewModels.Add(viewModel);
         }
         
         return View(viewModels);
