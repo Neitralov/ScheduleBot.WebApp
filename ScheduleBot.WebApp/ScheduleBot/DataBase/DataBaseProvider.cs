@@ -4,10 +4,7 @@ public sealed class DataBaseProvider : DbContext
 {
     public DbSet<Subscriber> Subscribers => Set<Subscriber>();
 
-    public DataBaseProvider()
-    {
-        Database.EnsureCreated();
-    }
+    public DataBaseProvider() => Database.EnsureCreated();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
