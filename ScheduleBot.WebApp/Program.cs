@@ -7,7 +7,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataBaseProvider>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/login");
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login";
+        options.ExpireTimeSpan = TimeSpan.FromDays(365);
+        options.Cookie.MaxAge = TimeSpan.FromDays(365);
+    });
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -24,7 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();   
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -36,7 +41,7 @@ app.Run();
 void LoadConfigurationToEnvironment()
 {
     Environment.SetEnvironmentVariable("FirstCorpsSchedulePath", app.Configuration["FirstCorpsSchedulePath"]);
-    Environment.SetEnvironmentVariable("SecondCorpsSchedulePath", app.Configuration["SecondCorpsSchedulePath"]);    
-    Environment.SetEnvironmentVariable("ThirdCorpsSchedulePath", app.Configuration["ThirdCorpsSchedulePath"]);    
-    Environment.SetEnvironmentVariable("FourthCorpsSchedulePath", app.Configuration["FourthCorpsSchedulePath"]);    
+    Environment.SetEnvironmentVariable("SecondCorpsSchedulePath", app.Configuration["SecondCorpsSchedulePath"]);
+    Environment.SetEnvironmentVariable("ThirdCorpsSchedulePath", app.Configuration["ThirdCorpsSchedulePath"]);
+    Environment.SetEnvironmentVariable("FourthCorpsSchedulePath", app.Configuration["FourthCorpsSchedulePath"]);
 }
