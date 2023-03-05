@@ -109,11 +109,26 @@ public class Notifier
         }
         catch
         {
-            LogInfo(chatId == _adminId
-                ? $"Пользователь ADMIN заблокировал бота. Производится удаление."
-                : $"Пользователь {chatId} заблокировал бота. Производится удаление.");
-            
-            await RemoveSubscriberAsync(chatId);
+            if (await IsSubscriberBlockedBot(chatId))
+            {
+                LogInfo(chatId == _adminId
+                    ? $"Пользователь ADMIN заблокировал бота. Производится отписка."
+                    : $"Пользователь {chatId} заблокировал бота. Производится отписка.");
+                
+                await RemoveSubscriberAsync(chatId);    
+            }
+            else
+            {
+                LogInfo(chatId == _adminId
+                    ? $"Пользователь ADMIN заблокировал бота."
+                    : $"Пользователь {chatId} заблокировал бота.");
+            }
         }
+    }
+
+    private static async Task<bool> IsSubscriberBlockedBot(long chatId)
+    {
+        await using var db = new DataBaseProvider();
+        return db.Subscribers.Any(x => x.TelegramId == chatId);    
     }
 }
