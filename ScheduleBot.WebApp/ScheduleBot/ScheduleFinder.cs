@@ -85,9 +85,12 @@ public class ScheduleFinder
     {
         Directory.CreateDirectory(Environment.CurrentDirectory + "/Data");
         
-        var clientHandler = new HttpClientHandler();
-        clientHandler.ServerCertificateCustomValidationCallback = 
-            (sender, cert, chain, sslPolicyErrors) => true;
+        var clientHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = 
+                (sender, cert, chain, sslPolicyErrors) => true
+        };
+       
         using var httpClient = new HttpClient(clientHandler);
 
         try
