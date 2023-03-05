@@ -90,11 +90,11 @@ public class BotHandler
         {
             await task.Invoke();
         }
-        catch
+        catch (Exception e)
         {
             LogInfo(chatId == _adminId
-                ? $"Пользователь ADMIN заблокировал бота. Ответ отменен."
-                : $"Пользователь {chatId} заблокировал бота. Ответ отменен.");
+                ? $"Ошибка во время обработки ответа пользователя ADMIN. Exception: {e.Message}"
+                : $"Ошибка во время обработки ответа пользователя {chatId}. Exception: {e.Message}");
         }
     }
 
