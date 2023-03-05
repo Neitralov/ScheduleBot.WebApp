@@ -84,7 +84,11 @@ public class ScheduleFinder
     private static async Task<bool> TryLoadScheduleAsync(Corps corps)
     {
         Directory.CreateDirectory(Environment.CurrentDirectory + "/Data");
-        using var httpClient = new HttpClient();
+        
+        var clientHandler = new HttpClientHandler();
+        clientHandler.ServerCertificateCustomValidationCallback = 
+            (sender, cert, chain, sslPolicyErrors) => true;
+        using var httpClient = new HttpClient(clientHandler);
 
         try
         {
