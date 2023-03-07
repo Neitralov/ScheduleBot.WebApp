@@ -40,6 +40,8 @@ public class AuthorizationController : Controller
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity));
 
+        LogInfo($"Произведен вход в систему.");
+
         return Redirect("/");
     }
 
