@@ -9,10 +9,7 @@ public class StartBotViewModel
     
     [Required(ErrorMessage = "Ошибка - поле не может быть пустым")]
     public string? AdminId { get; init; }
-    
-    [Required(ErrorMessage = "Ошибка - поле не может быть пустым")]
-    public string? CloudConvertTokenApi { get; init; }
-    
+
     [Required(ErrorMessage = "Ошибка - поле не может быть пустым")]
     public string? TimeBetweenChecks { get; init; }
     

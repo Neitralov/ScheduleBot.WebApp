@@ -5,23 +5,21 @@ public class Bot
     private static Bot? _instance;
 
     private readonly TelegramBotClient _botClient;
-    private readonly CloudConvertAPI _xlsxConvert;
     private readonly CancellationTokenSource _cts;
 
     public bool IsRunning { get; private set; }
 
     public static string GetSchedulePicturePath(Corps corps) => Environment.CurrentDirectory + $"/Data/Schedule{(int)corps}.jpg";
 
-    private Bot(string botClientApiToken, string cloudConvertApiToken)
+    private Bot(string botClientApiToken)
     {
         _botClient = new TelegramBotClient(botClientApiToken);
-        _xlsxConvert = new CloudConvertAPI(cloudConvertApiToken);
         _cts = new CancellationTokenSource();
     }
 
-    public static void CreateInstance(string botClientApiToken, string cloudConvertApiToken)
+    public static void CreateInstance(string botClientApiToken)
     {
-        _instance = new Bot(botClientApiToken, cloudConvertApiToken);
+        _instance = new Bot(botClientApiToken);
     }
 
     public static Bot? GetInstance()
@@ -43,9 +41,9 @@ public class Bot
             return;
         
         var notifier = new Notifier(_botClient, adminId);
-        var scheduleFinder = new ScheduleFinder(notifier, _xlsxConvert, _cts);
+        var scheduleFinder = new ScheduleFinder(notifier, _cts);
         
-        await scheduleFinder.CheckForCachedScheduleForAllCorpsAsync();
+        await ScheduleFinder.CheckForCachedScheduleForAllCorpsAsync();
         
         var scheduleCheckTimeRange = new HoursRange(scheduleCheckTimeStart, scheduleCheckTimeEnd);
         

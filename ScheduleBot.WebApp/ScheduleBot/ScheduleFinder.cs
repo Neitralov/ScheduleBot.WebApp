@@ -3,16 +3,14 @@
 public class ScheduleFinder
 {
     private readonly Notifier _notifier;
-    private readonly CloudConvertAPI _xlsxConverter;
     private readonly CancellationTokenSource _cts;
     
     private static string GetOldTablePath(Corps corps) => Environment.CurrentDirectory + $"/Data/Schedule{(int)corps}.xlsx";
     private static string GetNewTablePath(Corps corps) => Environment.CurrentDirectory + $"/Data/Schedule{(int)corps}(new).xlsx";
 
-    public ScheduleFinder(Notifier notifier, CloudConvertAPI xlsxConverter, CancellationTokenSource cts)
+    public ScheduleFinder(Notifier notifier, CancellationTokenSource cts)
     {
         _notifier = notifier;
-        _xlsxConverter = xlsxConverter;
         _cts = cts;
     }
     
@@ -56,7 +54,7 @@ public class ScheduleFinder
         }
     }
     
-    public async Task CheckForCachedScheduleForAllCorpsAsync()
+    public static async Task CheckForCachedScheduleForAllCorpsAsync()
     {
         var tasks = new[]
         {
@@ -69,7 +67,7 @@ public class ScheduleFinder
         await Task.WhenAll(tasks);
     }
     
-    private async Task CheckForCachedScheduleAsync(Corps corps)
+    private static async Task CheckForCachedScheduleAsync(Corps corps)
     {
         if (File.Exists(GetOldTablePath(corps)) == false)
         {
@@ -132,45 +130,21 @@ public class ScheduleFinder
         return Task.FromResult(false);
     }
     
-    private async Task GetSchedulePictureAsync(Corps corps)
+    private static async Task GetSchedulePictureAsync(Corps corps)
     {
-        var schedulePath = corps switch
+        using var process = new Process
         {
-            Corps.First => Environment.GetEnvironmentVariable("FirstCorpsSchedulePath"),
-            Corps.Second => Environment.GetEnvironmentVariable("SecondCorpsSchedulePath"),
-            Corps.Third => Environment.GetEnvironmentVariable("ThirdCorpsSchedulePath"),
-            Corps.Fourth => Environment.GetEnvironmentVariable("FourthCorpsSchedulePath"),
-            _ => throw new Exception("Такого корпуса не существует")
-        };
-        
-        var job = await _xlsxConverter.CreateJobAsync(new JobCreateRequest()
-        {
-            Tasks = new
+            StartInfo =
             {
-                import_it = new ImportUrlCreateRequest()
-                {
-                    Url = schedulePath
-                },
-                convert = new ConvertCreateRequest()
-                {
-                    Input = "import_it",
-                    Input_Format = "xlsx",
-                    Output_Format = "jpg"
-                },
-                export_it = new ExportUrlCreateRequest()
-                {
-                    Input = "convert"
-                }
+                FileName = "/bin/bash",
+                Arguments =
+                    $"-c \"cd /app/Data ; libreoffice --convert-to jpg {GetOldTablePath(corps)} --headless\"",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true
             }
-        });
+        };
 
-        job = await _xlsxConverter.WaitJobAsync(job.Data.Id);
-        var exportTask = job.Data.Tasks.FirstOrDefault(t => t.Name == "export_it");
-        var fileExport = exportTask?.Result.Files.FirstOrDefault();
-        
-        using var httpClient = new HttpClient();
-
-        await File.WriteAllBytesAsync(Bot.GetSchedulePicturePath(corps),
-            await httpClient.GetByteArrayAsync(fileExport!.Url));
+        process.Start();
+        await process.WaitForExitAsync(); 
     }
 }

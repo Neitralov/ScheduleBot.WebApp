@@ -14,11 +14,7 @@ global using Telegram.Bot.Types;
 global using Telegram.Bot.Types.Enums;
 global using Telegram.Bot.Types.InputFiles;
 
-global using CloudConvert.API;
-global using CloudConvert.API.Models.ExportOperations;
-global using CloudConvert.API.Models.ImportOperations;
-global using CloudConvert.API.Models.JobModels;
-global using CloudConvert.API.Models.TaskOperations;
+global using System.Diagnostics;
 
 global using Microsoft.EntityFrameworkCore;
 

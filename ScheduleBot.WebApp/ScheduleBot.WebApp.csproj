@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CloudConvert.API" Version="1.2.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.13" />
       <PackageReference Include="NLog" Version="5.1.1" />

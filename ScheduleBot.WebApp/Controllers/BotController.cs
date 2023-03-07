@@ -19,7 +19,6 @@ public class BotController : Controller
         {
             BotTokenApi = Environment.GetEnvironmentVariable("BotTokenApi"),
             AdminId = Environment.GetEnvironmentVariable("AdminId"),
-            CloudConvertTokenApi = Environment.GetEnvironmentVariable("CloudConvertTokenApi"),
             TimeBetweenChecks = Environment.GetEnvironmentVariable("TimeBetweenChecks"),
             CheckTimeStart = Environment.GetEnvironmentVariable("CheckTimeStart"),
             CheckTimeEnd = Environment.GetEnvironmentVariable("CheckTimeEnd"),
@@ -58,7 +57,6 @@ public class BotController : Controller
         
         Environment.SetEnvironmentVariable("BotTokenApi", viewModel.BotTokenApi);
         Environment.SetEnvironmentVariable("AdminId", viewModel.AdminId);
-        Environment.SetEnvironmentVariable("CloudConvertTokenApi", viewModel.CloudConvertTokenApi);
         Environment.SetEnvironmentVariable("TimeBetweenChecks", viewModel.TimeBetweenChecks);
         Environment.SetEnvironmentVariable("CheckTimeStart", viewModel.CheckTimeStart);
         Environment.SetEnvironmentVariable("CheckTimeEnd", viewModel.CheckTimeEnd);
@@ -69,7 +67,7 @@ public class BotController : Controller
         Environment.SetEnvironmentVariable("FourthCorpsSchedulePath", viewModel.FourthCorpsSchedulePath);
         
         LogInfo("Бот включается");
-        Bot.CreateInstance(viewModel.BotTokenApi!, viewModel.CloudConvertTokenApi!);
+        Bot.CreateInstance(viewModel.BotTokenApi!);
 
         var timeBetweenChecksInMilliseconds = timeBetweenChecksInSeconds * 1000;
         
