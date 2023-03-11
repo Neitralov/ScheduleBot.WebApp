@@ -107,8 +107,7 @@ public class ScheduleFinder
         }
         catch (Exception e)
         {
-            LogError("Не удается скачать расписание с сайта. " + e.Message);
-            Bot.GetInstance()?.Kill();
+            LogError($"Не удается скачать расписание с сайта. " + e.Message);
             return false;
         }
 
