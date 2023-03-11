@@ -107,7 +107,7 @@ public class ScheduleFinder
         }
         catch (Exception e)
         {
-            LogError($"Не удается скачать расписание с сайта. " + e.Message);
+            LogError($"Не удается скачать расписание с сайта для корпуса №{corps}. " + e.Message);
             return false;
         }
 
