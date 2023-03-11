@@ -72,7 +72,10 @@ public class ScheduleFinder
         if (File.Exists(GetOldTablePath(corps)) == false)
         {
             if (!await TryLoadScheduleAsync(corps))
-                throw new Exception("Не удалось скачать расписание с сайта.");
+            {
+                Bot.GetInstance()?.Kill();
+                return;
+            }
             
             File.Move(GetNewTablePath(corps), GetOldTablePath(corps));
             await GetSchedulePictureAsync(corps);
