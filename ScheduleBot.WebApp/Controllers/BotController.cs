@@ -66,7 +66,6 @@ public class BotController : Controller
         Environment.SetEnvironmentVariable("ThirdCorpsSchedulePath", viewModel.ThirdCorpsSchedulePath);
         Environment.SetEnvironmentVariable("FourthCorpsSchedulePath", viewModel.FourthCorpsSchedulePath);
         
-        LogInfo("Бот включается");
         Bot.CreateInstance(viewModel.BotTokenApi!);
 
         var timeBetweenChecksInMilliseconds = timeBetweenChecksInSeconds * 1000;
@@ -93,7 +92,7 @@ public class BotController : Controller
     {
         Bot.GetInstance()?.Kill();
         CheckingIfBotIsRunning();
-        LogInfo("Бот выключен");
+        LogInfo("Бот выключен.");
         return Redirect("/bot");
     }
 }

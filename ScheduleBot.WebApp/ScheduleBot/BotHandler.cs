@@ -28,7 +28,7 @@ public class BotHandler
 
         var me = await _botClient.GetMeAsync(_cts.Token);
 
-        LogInfo($"Начато прослушивание бота @{me.Username}");
+        LogInfo($"Начато прослушивание бота @{me.Username}.");
         Console.ReadLine();
     }
 
@@ -93,8 +93,8 @@ public class BotHandler
         catch (Exception e)
         {
             LogInfo(chatId == _adminId
-                ? $"Ошибка во время обработки ответа пользователя ADMIN. Exception: {e.Message}"
-                : $"Ошибка во время обработки ответа пользователя {chatId}. Exception: {e.Message}");
+                ? $"Ошибка во время обработки ответа пользователя ADMIN. Exception: {e.Message}."
+                : $"Ошибка во время обработки ответа пользователя {chatId}. Exception: {e.Message}.");
         }
     }
 
@@ -104,7 +104,7 @@ public class BotHandler
         var errorMessage = exception switch
         {
             ApiRequestException apiRequestException
-                => $"Telegram API Error: [{apiRequestException.ErrorCode}] {apiRequestException.Message}",
+                => $"Telegram API Error: [{apiRequestException.ErrorCode}] {apiRequestException.Message}.",
             _ => exception.ToString()
         };
 
