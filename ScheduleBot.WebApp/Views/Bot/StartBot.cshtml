@@ -78,6 +78,50 @@
                     <input class="submit-to-terminate" type="submit" value="Выключить"/>
                 </div>
             </div>
+            <div class="delimiter"></div>
+            <div class="panel">
+                <h2 class="header">Настройки конфигурации</h2>
+                <div class="input-block">
+                    <label class="input-block__label">Токен бота</label>
+                    <input class="input-text-field readonly-input" type="text" name="BotTokenApi" value="@Model.BotTokenApi" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Telegram ID администратора</label>
+                    <input class="input-text-field readonly-input" type="text" name="AdminId" value="@Model.AdminId" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Время между проверками расписания (в секундах)</label>
+                    <input class="input-text-field readonly-input" type="text" name="TimeBetweenChecks" value="@Model.TimeBetweenChecks" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Начало диапазона проверки расписания (в часах)</label>
+                    <input class="input-text-field readonly-input" type="text" name="CheckTimeStart" value="@Model.CheckTimeStart" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Конец диапазона проверки расписания (в часах)</label>
+                    <input class="input-text-field readonly-input" type="text" name="CheckTimeEnd" value="@Model.CheckTimeEnd" readonly/>
+                </div>
+            </div>
+            <div class="delimiter"></div>
+            <div class="panel">
+                <h2 class="header">Ссылки на файлы с расписанием</h2>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание первого корпуса</label>
+                    <input class="input-text-field readonly-input" type="text" name="FirstCorpsSchedulePath" value="@Model.FirstCorpsSchedulePath" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание второго корпуса</label>
+                    <input class="input-text-field readonly-input" type="text" name="SecondCorpsSchedulePath" value="@Model.SecondCorpsSchedulePath" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание третьего корпуса</label>
+                    <input class="input-text-field readonly-input" type="text" name="ThirdCorpsSchedulePath" value="@Model.ThirdCorpsSchedulePath" readonly/>
+                </div>
+                <div class="input-block">
+                    <label class="input-block__label">Расписание четвертого корпуса</label>
+                    <input class="input-text-field readonly-input" type="text" name="FourthCorpsSchedulePath" value="@Model.FourthCorpsSchedulePath" readonly/>
+                </div>
+            </div>
         </form>
     }
 </div>
