@@ -13,6 +13,9 @@ public class AuthorizationController : Controller
     [Route("/login")]
     public IActionResult Login()
     {
+        if (User.Identity.IsAuthenticated)
+            return Redirect("/");
+        
         return View();
     }
 
