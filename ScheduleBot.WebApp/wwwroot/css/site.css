@@ -241,3 +241,77 @@ input[type="file"] {
 .readonly-input {
     color: gray;
 }
+
+/* Стили шаблона */ 
+
+#menu {
+    position: fixed;
+    width: 350px;
+    height: 100%;
+    background: #628EFF;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    background: #5279DD;
+    height: 80px;
+}
+
+#header h1 {
+    font-weight: bold;
+    color: white;
+    font-size: 28px;
+}
+
+#nav {
+    height: calc(100% - 109px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#top-nav {
+    margin: -20px 20px 0 20px
+}
+
+#bottom-nav {
+    margin: 0 20px 25px 20px
+}
+
+.page-link {
+    margin: 9px 0;
+    padding: 6px 10px;
+    border-radius: 25px;
+}
+
+.page-link:hover {
+    background: #5881ec;
+}
+
+#currentPage {
+    background: #5279DD;
+}
+
+.page-link-container {
+    display: flex;
+    align-items: center;
+}
+
+.page-link-container p {
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    margin-left: 10px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 350px);
+    margin-left: 350px;
+}
