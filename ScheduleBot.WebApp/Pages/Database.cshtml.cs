@@ -1,30 +1,23 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+namespace ScheduleBot.WebApp.Pages;
 
-namespace ScheduleBot.WebApp.Controllers;
-
-public class DatabaseController : Controller
+[Authorize]
+[IgnoreAntiforgeryToken]
+public class DatabaseModel : PageModel
 {
-    [HttpGet]
-    [Authorize]
-    [Route("/database")]
-    public IActionResult Database()
+    public IActionResult OnGet()
     {
-        return View();
+        return Page();
     }
-
-    [HttpPost]
-    [Authorize]
-    [Route("/database/import")]
-    public async Task<IActionResult> DatabaseImport(IFormFile? file)
+    
+    public async Task<IActionResult> OnPostBackup(IFormFile? file)
     {
         if (file is null)
-            return View("Database");
+            return Page();
 
         var databaseFilesPath = Environment.CurrentDirectory + "/Database";
         var archivePath = Environment.CurrentDirectory + "/" + file.FileName;
 
-        await using (var stream = System.IO.File.Create(archivePath))
+        await using (var stream = Create(archivePath))
         {
             await file.CopyToAsync(stream);   
         }
@@ -35,21 +28,18 @@ public class DatabaseController : Controller
             overwriteFiles: true
         );
 
-        System.IO.File.Delete(archivePath);
+        Delete(archivePath);
 
-        return View("Database");
+        return Page();
     }
-
-    [HttpGet]
-    [Authorize]
-    [Route("/database/export")]
-    public IActionResult DatabaseExport()
+    
+    public IActionResult OnGetBackup()
     {
         var databaseFilesPath = Environment.CurrentDirectory + "/Database";
         var archivePath = Environment.CurrentDirectory + "/wwwroot/backup.zip";
 
-        if (System.IO.File.Exists(archivePath))
-            System.IO.File.Delete(archivePath);
+        if (Exists(archivePath))
+            Delete(archivePath);
 
         ZipFile.CreateFromDirectory(
             sourceDirectoryName: databaseFilesPath,
@@ -57,5 +47,5 @@ public class DatabaseController : Controller
         );
 
         return File("backup.zip", "application/zip", "backup.zip");
-    }
+    }    
 }

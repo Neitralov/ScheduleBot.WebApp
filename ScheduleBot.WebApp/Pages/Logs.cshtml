@@ -1,11 +1,12 @@
-@model List<LogsViewModel>
+@page
+@model LogsModel
 @{
     ViewData["Title"] = "Просмотр логов";
 }
 
 <div class="shell">
     <div class="panel">
-        @foreach (var log in @Model)
+        @foreach (var log in @Model.Logs)
         {
             <h4>
                 @log.DateTime
@@ -20,7 +21,7 @@
             </h4>
             <h3 class="panel-3__h3">@log.Message</h3>
 
-            if (Model[^1] != log)
+            if (Model.Logs[^1] != log)
             {
                 <hr class="horizontal-line"/>
             }

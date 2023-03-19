@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - ScheduleBot</title>
     <link rel="icon" href="~/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/ScheduleBot.WebApp.styles.css" asp-append-version="true"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,9 +17,9 @@
     </div>
     <div id="nav">
         <div id="top-nav">
-            <a asp-controller="Bot" asp-action="StartBot">
+            <a asp-page="StartBot">
                 <div class="page-link"
-                     @if (Context.Request.Path.ToString().Contains("/bot") || Context.Request.Path == "/")
+                     @if (Context.Request.Path.ToString().Contains("/StartBot") || Context.Request.Path == "/")
                      {
                          @:id="currentPage" 
                      }>
@@ -30,9 +29,9 @@
                     </div>
                 </div>
             </a>
-            <a asp-controller="Statistics" asp-action="Statistics">
+            <a asp-page="Statistics">
                 <div class="page-link"
-                     @if (Context.Request.Path.ToString().Contains("/statistics"))
+                     @if (Context.Request.Path.ToString().Contains("/Statistics"))
                      {
                          @:id="currentPage" 
                      }>
@@ -42,9 +41,9 @@
                     </div>
                 </div>
             </a>
-            <a asp-controller="Logs" asp-action="Logs">
+            <a asp-page="Logs">
                 <div class="page-link"
-                     @if (Context.Request.Path.ToString().Contains("/logs"))
+                     @if (Context.Request.Path.ToString().Contains("/Logs"))
                      {
                          @:id="currentPage" 
                      }>
@@ -54,9 +53,9 @@
                     </div>
                 </div>
             </a>
-            <a asp-controller="Database" asp-action="Database">
+            <a asp-page="Database">
                 <div class="page-link"
-                     @if (Context.Request.Path.ToString().Contains("/database"))
+                     @if (Context.Request.Path.ToString().Contains("/Database"))
                      {
                          @:id="currentPage" 
                      }>
@@ -69,7 +68,7 @@
         </div>
         <div id="bottom-nav">
             <div class="page-link">
-                <a class asp-controller="Authorization" asp-action="Logout">
+                <a class asp-page="Login" asp-page-handler="Logout">
                     <div class="page-link-container">
                         <img width="28px" height="28px" src="~/icons/logout.svg" alt="Тут иконка"/>
                         <p>Выход</p>
@@ -82,9 +81,5 @@
 <div id="content">
     @RenderBody()
 </div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

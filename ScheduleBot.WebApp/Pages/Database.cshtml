@@ -1,9 +1,11 @@
+@page "{handler?}"
+@model DatabaseModel
 @{
     ViewData["Title"] = "База данных";
 }
 
 <div class="shell">
-    <form method="post" asp-action="DatabaseImport" enctype="multipart/form-data">
+    <form method="post" asp-page-handler="Backup" enctype="multipart/form-data">
         <div class="panel">
             <div class="subcontainer">
                 <h2>Импортировать копию базы данных</h2>
@@ -19,11 +21,11 @@
         </div>
     </form>
     <div class="delimiter"></div>
-    <form method="get" asp-action="DatabaseExport">
+    <form method="get" asp-page-handler="Backup">
         <div class="panel">
             <div class="subcontainer">
                 <h2>Экспортировать копию базы данных</h2>
-                <input class="submit-to-run" type="submit" value="Скачать"/>
+                <input asp-page-handler="Backup" class="submit-to-run" type="submit" value="Скачать"/>
             </div>
         </div>
     </form>

@@ -1,5 +1,5 @@
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model StartBotViewModel
+@page "{handler?}"
+@model StartBotModel
 @{
     ViewData["Title"] = "Управление ботом";
 }
@@ -7,7 +7,7 @@
 <div class="shell">
     @if (ViewBag.IsRunning == false)
     {
-        <form method="post" action="/run">
+        <form method="post">
             <div class="panel">
                 <div class="subcontainer">
                     <h2>Статус бота: <span style="color: #e54949">ОСТАНОВЛЕН</span></h2>
@@ -71,7 +71,7 @@
     }
     else
     {
-        <form method="get" asp-action="ShutdownBot">
+        <form method="get" asp-page-handler="Shutdown">
             <div class="panel">
                 <div class="subcontainer">
                     <h2>Статус бота: <span style="color: #4AE359">РАБОТАЕТ</span></h2>

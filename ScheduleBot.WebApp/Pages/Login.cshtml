@@ -1,4 +1,5 @@
-@model AuthorizationViewModel 
+@page
+@model LoginModel
 @{
     ViewData["Title"] = "Авторизация";
     Layout = null;
@@ -21,7 +22,7 @@
         <span class="error" asp-validation-for="Password"></span>
         <form method="post">
             <div class="password-container">
-                <input class="password" type="password" asp-for="Password"/>
+                <input class="password" type="password" name="Password" asp-for="Password"/>
             </div>
             <div class="submit-container">
                 <input class="submit-to-run" type="submit" value="Войти"/>
@@ -29,7 +30,4 @@
         </form>
     </div>
 </div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
 </body>
