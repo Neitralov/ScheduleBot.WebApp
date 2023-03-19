@@ -69,7 +69,7 @@ public class ScheduleFinder
     
     private static async Task CheckForCachedScheduleAsync(Corps corps)
     {
-        if (File.Exists(GetOldTablePath(corps)) == false)
+        if (Exists(GetOldTablePath(corps)) == false)
         {
             if (!await TryLoadScheduleAsync(corps))
             {
@@ -77,7 +77,7 @@ public class ScheduleFinder
                 return;
             }
             
-            File.Move(GetNewTablePath(corps), GetOldTablePath(corps));
+            Move(GetNewTablePath(corps), GetOldTablePath(corps));
             await GetSchedulePictureAsync(corps);
         }
     }
@@ -88,8 +88,7 @@ public class ScheduleFinder
         
         var clientHandler = new HttpClientHandler
         {
-            ServerCertificateCustomValidationCallback = 
-                (sender, cert, chain, sslPolicyErrors) => true
+            ServerCertificateCustomValidationCallback = (_, _, _, _) => true
         };
        
         using var httpClient = new HttpClient(clientHandler);
@@ -105,12 +104,12 @@ public class ScheduleFinder
                 _ => throw new Exception("Такого корпуса не существует")
             };
             
-            await File.WriteAllBytesAsync(GetNewTablePath(corps),
+            await WriteAllBytesAsync(GetNewTablePath(corps),
                 await httpClient.GetByteArrayAsync(schedulePath));
         }
         catch (Exception e)
         {
-            LogError($"Не удается скачать расписание с сайта для корпуса №{corps}. {e.Message}.");
+            LogError($"Не удается скачать расписание с сайта для корпуса №{(int)corps}. {e.Message}.");
             return false;
         }
 
@@ -124,11 +123,11 @@ public class ScheduleFinder
 
         if (newTable.Length != oldTable.Length)
         {
-            File.Move(GetNewTablePath(corps), GetOldTablePath(corps), true);
+            Move(GetNewTablePath(corps), GetOldTablePath(corps), true);
             return Task.FromResult(true);
         }
 
-        File.Delete(GetNewTablePath(corps));
+        Delete(GetNewTablePath(corps));
         return Task.FromResult(false);
     }
     

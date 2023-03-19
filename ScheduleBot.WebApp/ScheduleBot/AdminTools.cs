@@ -63,11 +63,11 @@ public class AdminTools
             var destinationArchiveFileName = Environment.CurrentDirectory + "/logs.zip";
             ZipFile.CreateFromDirectory(sourceDirectoryName, destinationArchiveFileName); 
             
-            await using var stream = File.OpenRead(destinationArchiveFileName);
+            await using var stream = OpenRead(destinationArchiveFileName);
             var inputOnlineFile = new InputOnlineFile(stream, "Logs.zip");
             await _botClient.SendDocumentAsync(chatId, inputOnlineFile);
             
-            File.Delete(destinationArchiveFileName);
+            Delete(destinationArchiveFileName);
         }
         else
         {

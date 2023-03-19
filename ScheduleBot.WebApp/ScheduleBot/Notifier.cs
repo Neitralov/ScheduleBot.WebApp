@@ -100,7 +100,7 @@ public class Notifier
     
     public async Task SendSchedulePictureAsync(long chatId, Corps corps)
     {
-        await using var stream = File.OpenRead(Bot.GetSchedulePicturePath(corps));
+        await using var stream = OpenRead(Bot.GetSchedulePicturePath(corps));
         var inputOnlineFile = new InputOnlineFile(stream, $"Расписание корпуса #{(int)corps}.jpg");
 
         try
